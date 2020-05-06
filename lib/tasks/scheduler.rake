@@ -106,7 +106,6 @@ task :update_feed => :environment do
     }
   }
   response = client.multicast(user_ids, message)
-  end
   "OK"
   def create_message(imgurl, website, weathertext, iconurl1, iconurl2, iconurl3, morning, moonning, evening, maxtemperature, mintemperature, bottomcomment)
     {
