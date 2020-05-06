@@ -184,12 +184,27 @@ class LinebotController < ApplicationController
           when /.*(かわいい|可愛い|カワイイ|きれい|綺麗|キレイ|素敵|ステキ|すてき|面白い|おもしろい|ありがと|すごい|スゴイ|スゴい|好き|頑張|がんば|ガンバ).*/
             push =
               "ありがとう！！！\n優しい言葉をかけてくれるあなたはとても素敵です(^^)"
+              message_text = {
+                type: 'text',
+                text: push
+              }
+              client.reply_message(event['replyToken'], message_text)
           when /.*(こんにちは|こんばんは|初めまして|はじめまして|おはよう).*/
             push =
               "こんにちは。\n声をかけてくれてありがとう\n今日があなたにとっていい日になりますように(^^)"
+              message_text = {
+                type: 'text',
+                text: push
+              }
+              client.reply_message(event['replyToken'], message_text)
           else
             push =
               "今日の天気を知りたい場合は「今日」と、明日の天気を知りたい場合は「明日」と、明後日の天気を知りたい場合は「明後日」と入力して下さい。"
+              message_text = {
+                type: 'text',
+                text: push
+              }
+              client.reply_message(event['replyToken'], message_text)
             # per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
             # per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
             # per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]l'].text
@@ -213,11 +228,12 @@ class LinebotController < ApplicationController
           # テキスト以外（画像等）のメッセージが送られた場合
         else
           push = "テキスト以外は判断しかねます。今日の天気を知りたい場合は「今日」と、明日の天気を知りたい場合は「明日」と、明後日の天気を知りたい場合は「明後日」と入力して下さい。"
+          message_text = {
+            type: 'text',
+            text: push
+          }
+          client.reply_message(event['replyToken'], message_text)
         end
-        message_text = {
-          type: 'text',
-          text: push
-        }
         message = {
           "type": 'flex',
           "altText": 'This is a Flex Message',
@@ -230,7 +246,6 @@ class LinebotController < ApplicationController
           }
         }
         client.reply_message(event['replyToken'], message)
-        client.reply_message(event['replyToken'], message_text)
         # LINEお友達追された場合（機能②）
       when Line::Bot::Event::Follow
         # 登録したユーザーのidをユーザーテーブルに格納
