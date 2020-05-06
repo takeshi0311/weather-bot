@@ -88,7 +88,7 @@ class LinebotController < ApplicationController
         message = {
           # type: 'text',
           # text: push
-          {
+          # {
             "type": "bubble",
             "hero": {
               "type": "image",
@@ -210,7 +210,7 @@ class LinebotController < ApplicationController
               ],
               "flex": 0
             }
-          }
+          # }
         }
         client.reply_message(event['replyToken'], message)
         # LINEお友達追された場合（機能②）
