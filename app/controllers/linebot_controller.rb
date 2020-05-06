@@ -86,8 +86,131 @@ class LinebotController < ApplicationController
           push = "テキスト以外はわからないよ〜(；；)"
         end
         message = {
-          type: 'text',
-          text: push
+          # type: 'text',
+          # text: push
+          {
+            "type": "bubble",
+            "hero": {
+              "type": "image",
+              "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU",
+              "size": "full",
+              "aspectRatio": "20:13",
+              "aspectMode": "cover",
+              "action": {
+                "type": "uri",
+                "uri": "http://linecorp.com/"
+              }
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "本日は晴れです。",
+                  "weight": "bold",
+                  "size": "xl"
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "icon",
+                      "size": "sm",
+                      "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                    },
+                    {
+                      "type": "icon",
+                      "size": "sm",
+                      "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                    },
+                    {
+                      "type": "icon",
+                      "size": "sm",
+                      "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "margin": "lg",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "baseline",
+                      "spacing": "sm",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "降水確率",
+                          "color": "#aaaaaa",
+                          "size": "xs",
+                          "flex": 1,
+                          "margin": "none"
+                        },
+                        {
+                          "type": "text",
+                          "text": "朝:30%　昼:60%　夜:30%",
+                          "wrap": true,
+                          "color": "#666666",
+                          "size": "xs",
+                          "flex": 3
+                        }
+                      ]
+                    },
+                    {
+                      "type": "box",
+                      "layout": "baseline",
+                      "spacing": "sm",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "コメント",
+                          "color": "#aaaaaa",
+                          "size": "xs",
+                          "flex": 2
+                        },
+                        {
+                          "type": "text",
+                          "wrap": true,
+                          "color": "#666666",
+                          "size": "sm",
+                          "flex": 6,
+                          "text": "今日は晴れです！　　　　　いい天気です。　　　　　　今日も頑張っていきましょう！！"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "button",
+                  "style": "link",
+                  "height": "sm",
+                  "action": {
+                    "type": "uri",
+                    "label": "WEBSITE",
+                    "uri": "https://www.jma.go.jp/jp/week/329.html"
+                  }
+                },
+                {
+                  "type": "spacer",
+                  "size": "sm"
+                }
+              ],
+              "flex": 0
+            }
+          }
         }
         client.reply_message(event['replyToken'], message)
         # LINEお友達追された場合（機能②）
