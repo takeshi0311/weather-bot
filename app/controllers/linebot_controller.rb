@@ -230,6 +230,7 @@ class LinebotController < ApplicationController
           }
         }
         client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], message_text)
         # LINEお友達追された場合（機能②）
       when Line::Bot::Event::Follow
         # 登録したユーザーのidをユーザーテーブルに格納
