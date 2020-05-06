@@ -28,6 +28,18 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/'
           # 当日朝のメッセージの送信の下限値は20％としているが、明日・明後日雨が降るかどうかの下限値は30％としている
+          imgurl         = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU"
+          website        = "https://www.jma.go.jp/jp/week/329.html"
+          weathertext    = "本日は雨のちくもりです。"
+          iconurl1       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+          iconurl2       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+          iconurl3       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+          morning        = 30
+          moonning       = 40
+          evening        = 60
+          maxtemperature = 25
+          mintemperature = 16
+          bottomcomment  = "今日は晴れです！　　　　　いい天気です。　　　　　　今日も頑張っていきましょう！！"
           min_per = 30
           case input
             # 「明日」or「あした」というワードが含まれる場合
@@ -96,7 +108,7 @@ class LinebotController < ApplicationController
           {
             "type": 'carousel',
             "contents": [ 
-              create_message
+              create_message(imgurl, website, weathertext, iconurl1, iconurl2, iconurl3, morning, moonning, evening, maxtemperature, mintemperature, bottomcomment)
             ]
           }
         }
@@ -125,19 +137,19 @@ class LinebotController < ApplicationController
     }
   end
 
-  def create_message
+  def create_message(imgurl, website, weathertext, iconurl1, iconurl2, iconurl3, morning, moonning, evening, maxtemperature, mintemperature, bottomcomment)
     {
       "type": "bubble",
       "hero": {
         "type": "image",
-        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU",
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
         "action": {
           "type": "uri",
-          "uri": "http://linecorp.com/"
-        }
+          "uri": website
+        },
+        "url": imgurl
       },
       "body": {
         "type": "box",
@@ -145,9 +157,9 @@ class LinebotController < ApplicationController
         "contents": [
           {
             "type": "text",
-            "text": "本日は晴れです。",
+            "text": weathertext,
             "weight": "bold",
-            "size": "xl"
+            "size": "lg"
           },
           {
             "type": "box",
@@ -157,17 +169,17 @@ class LinebotController < ApplicationController
               {
                 "type": "icon",
                 "size": "sm",
-                "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                "url": iconurl1
               },
               {
                 "type": "icon",
                 "size": "sm",
-                "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                "url": iconurl2
               },
               {
                 "type": "icon",
                 "size": "sm",
-                "url": "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
+                "url": iconurl3
               }
             ]
           },
@@ -192,11 +204,32 @@ class LinebotController < ApplicationController
                   },
                   {
                     "type": "text",
-                    "text": "朝:30%　昼:60%　夜:30%",
+                    "text": "朝:#{morning}%　昼:#{moonning}%　夜:#{evening}%",
                     "wrap": true,
                     "color": "#666666",
                     "size": "xs",
                     "flex": 3
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "baseline",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "気温",
+                    "color": "#aaaaaa",
+                    "flex": 1,
+                    "margin": "none",
+                    "size": "xs"
+                  },
+                  {
+                    "type": "text",
+                    "text": "最高：#{maxtemperature}℃　最低：#{mintemperature}℃",
+                    "flex": 3,
+                    "color": "#666666",
+                    "size": "xs"
                   }
                 ]
               },
@@ -218,7 +251,7 @@ class LinebotController < ApplicationController
                     "color": "#666666",
                     "size": "sm",
                     "flex": 6,
-                    "text": "今日は晴れです！　　　　　いい天気です。　　　　　　今日も頑張っていきましょう！！"
+                    "text": bottomcomment
                   }
                 ]
               }
@@ -238,7 +271,7 @@ class LinebotController < ApplicationController
             "action": {
               "type": "uri",
               "label": "WEBSITE",
-              "uri": "https://www.jma.go.jp/jp/week/329.html"
+              "uri": website
             }
           },
           {
