@@ -113,9 +113,6 @@ class LinebotController < ApplicationController
             evening        = doc.elements[xpath + 'info[3]/rainfallchance/period[4]'].text.to_i
             maxtemperature = doc.elements[xpath + 'info[3]/temperature/range[1]'].text.to_i
             mintemperature = doc.elements[xpath + 'info[3]/temperature/range[2]'].text.to_i
-            # per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]l'].text
-            # per12to18 = doc.elements[xpath + 'info[3]/rainfallchance/period[3]l'].text
-            # per18to24 = doc.elements[xpath + 'info[3]/rainfallchance/period[4]l'].text
             if weather == "晴れ"
               imgurl        = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU"
               iconurl1      = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
@@ -191,34 +188,36 @@ class LinebotController < ApplicationController
             push =
               "こんにちは。\n声をかけてくれてありがとう\n今日があなたにとっていい日になりますように(^^)"
           else
-            per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
-            per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
-            per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]l'].text
-            if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-              word =
-                ["雨だけど元気出していこうね！",
-                 "雨に負けずファイト！！",
-                 "雨だけどああたの明るさでみんなを元気にしてあげて(^^)"].sample
-              push =
-                "今日の天気？\n今日は雨が降りそうだから傘があった方が安心だよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word}"
-            else
-              word =
-                ["天気もいいから一駅歩いてみるのはどう？(^^)",
-                 "今日会う人のいいところを見つけて是非その人に教えてあげて(^^)",
-                 "素晴らしい一日になりますように(^^)",
-                 "雨が降っちゃったらごめんね(><)"].sample
-              push =
-                "今日の天気？\n今日は雨は降らなさそうだよ。\n#{word}"
-            end
+            push =
+              "今日の天気を知りたい場合は「今日」と、明日の天気を知りたい場合は「明日」と、明後日の天気を知りたい場合は「明後日」と入力して下さい。"
+            # per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
+            # per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
+            # per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]l'].text
+            # if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
+            #   word =
+            #     ["雨だけど元気出していこうね！",
+            #      "雨に負けずファイト！！",
+            #      "雨だけどああたの明るさでみんなを元気にしてあげて(^^)"].sample
+            #   push =
+            #     "今日の天気？\n今日は雨が降りそうだから傘があった方が安心だよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word}"
+            # else
+            #   word =
+            #     ["天気もいいから一駅歩いてみるのはどう？(^^)",
+            #      "今日会う人のいいところを見つけて是非その人に教えてあげて(^^)",
+            #      "素晴らしい一日になりますように(^^)",
+            #      "雨が降っちゃったらごめんね(><)"].sample
+            #   push =
+            #     "今日の天気？\n今日は雨は降らなさそうだよ。\n#{word}"
+            # end
           end
           # テキスト以外（画像等）のメッセージが送られた場合
         else
-          push = "テキスト以外はわからないよ〜(；；)"
+          push = "テキスト以外は判断しかねます。今日の天気を知りたい場合は「今日」と、明日の天気を知りたい場合は「明日」と、明後日の天気を知りたい場合は「明後日」と入力して下さい。"
         end
-        # message = {
-        #   type: 'text',
-        #   text: push
-        # }
+        message_text = {
+          type: 'text',
+          text: push
+        }
         message = {
           "type": 'flex',
           "altText": 'This is a Flex Message',
@@ -230,7 +229,7 @@ class LinebotController < ApplicationController
             ]
           }
         }
-        client.reply_message(event['replyToken'], message)
+        client.reply_message(event['replyToken'], message, message_text)
         # LINEお友達追された場合（機能②）
       when Line::Bot::Event::Follow
         # 登録したユーザーのidをユーザーテーブルに格納
