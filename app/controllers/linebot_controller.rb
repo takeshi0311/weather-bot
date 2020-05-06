@@ -27,41 +27,17 @@ class LinebotController < ApplicationController
           xml  = open( url ).read.toutf8
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[2]/'
-          # 当日朝のメッセージの送信の下限値は20％としているが、明日・明後日雨が降るかどうかの下限値は30％としている
-          # imgurl         = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU"
-          # website        = "https://www.jma.go.jp/jp/week/329.html"
-          # weathertext    = "本日は雨のちくもりです。"
-          # iconurl1       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
-          # iconurl2       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
-          # iconurl3       = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
-          # morning        = 30
-          # moonning       = 40
-          # evening        = 60
-          # maxtemperature = 25
-          # mintemperature = 16
-          # bottomcomment  = "今日は晴れです！　　　　　いい天気です。　　　　　　今日も頑張っていきましょう！！"
-          # min_per = 30
-            weather        = doc.elements[xpath + 'info[2]/weather'].text
-            website        = "https://www.jma.go.jp/jp/week/329.html"
-            morning        = doc.elements[xpath + 'info[2]/rainfallchance/period[2]'].text.to_i
-            moonning       = doc.elements[xpath + 'info[2]/rainfallchance/period[3]'].text.to_i
-            evening        = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text.to_i
-            maxtemperature = doc.elements[xpath + 'info[2]/temperature/range[1]'].text.to_i
-            mintemperature = doc.elements[xpath + 'info[2]/temperature/range[2]'].text.to_i
-            weatherchange = ["一時", "時々", "後", "のち", "後一時", "後時々"]
+          weather        = doc.elements[xpath + 'info[2]/weather'].text
+          website        = "https://www.jma.go.jp/jp/week/329.html"
+          morning        = doc.elements[xpath + 'info[2]/rainfallchance/period[2]'].text.to_i
+          moonning       = doc.elements[xpath + 'info[2]/rainfallchance/period[3]'].text.to_i
+          evening        = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text.to_i
+          maxtemperature = doc.elements[xpath + 'info[2]/temperature/range[1]'].text.to_i
+          mintemperature = doc.elements[xpath + 'info[2]/temperature/range[2]'].text.to_i
+          weatherchange = ["一時", "時々", "後", "のち", "後一時", "後時々"]
           case input
             # 「明日」or「あした」というワードが含まれる場合
           when /.*(明日|あした).*/
-            # info[2]：明日の天気
-            # weather        = doc.elements[xpath + 'info[2]/weather'].text
-            # website        = "https://www.jma.go.jp/jp/week/329.html"
-            # morning        = doc.elements[xpath + 'info[2]/rainfallchance/period[2]'].text.to_i
-            # moonning       = doc.elements[xpath + 'info[2]/rainfallchance/period[3]'].text.to_i
-            # evening        = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text.to_i
-            # maxtemperature = doc.elements[xpath + 'info[2]/temperature/range[1]'].text.to_i
-            # mintemperature = doc.elements[xpath + 'info[2]/temperature/range[2]'].text.to_i
-            # weatherchange = ["一時", "時々", "後", "のち", "後一時", "後時々"]
-            # if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
             if weather == "晴れ"
               imgurl        = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7HQA6bcOaK5FlAjC8-iEOuM7Ad6KgUuSAlm_R_R_0HoRpimk9&usqp=CAU"
               iconurl1      = "https://www.photolibrary.jp/mhd4/img252/450-20120524224023194686.jpg"
