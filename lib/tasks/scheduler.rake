@@ -1,3 +1,4 @@
+namespace :greet do
 desc "This task is called by the Heroku scheduler add-on"
 task :update_feed => :environment do
   require 'line/bot'  # gem 'line-bot-api'
@@ -94,6 +95,9 @@ task :update_feed => :environment do
           weathertext   = "今日は#{weather}です。"
       end
   end
+
+  user_ids = User.all.pluck(:line_id)
+
   message = {
     "type": 'flex',
     "altText": 'This is a Flex Message',
@@ -106,7 +110,9 @@ task :update_feed => :environment do
     }
   }
   response = client.multicast(user_ids, message)
-  "OK"
+  # "OK"
+end
+
   def create_message(imgurl, website, weathertext, iconurl1, iconurl2, iconurl3, morning, moonning, evening, maxtemperature, mintemperature, bottomcomment)
     {
       "type": "bubble",
@@ -253,4 +259,5 @@ task :update_feed => :environment do
       }
     }
   end
+
 end
