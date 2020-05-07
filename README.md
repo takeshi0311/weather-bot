@@ -18,8 +18,8 @@ https://www.drk7.jp/weather/xml/23.xml
  https://gyazo.com/d70668ec5da702dba14a0320affa0307
  
 # Features
- 今回は下記の2つのことを意識して開発を行いました。
- ①視覚的に天気わかるようにLINEのメッセージのフォーマットを独自に作成。
+ 今回は下記の2つのことを意識して開発を行いました。<br>
+ ①視覚的に天気わかるようにLINEのメッセージのフォーマットを独自に作成。<br>
  ②「晴れ」、「雨」、「くもり」だけでなく「晴れのちくもり」や「くもり時々雨」など全ての場合の天気を正確にユーザーに伝えるために、天気によってメッセージを変えるように条件分岐させた。
 
 各天気に合わせたメッセージ一覧はいかになります。
@@ -28,7 +28,7 @@ https://www.drk7.jp/weather/xml/23.xml
 # Installation
  上記、LINEbotを使うには以下のQRコードを読み取り、友達追加をしてください。
  友達追加後、「今日」、「明日」、「明後日」のどれかを打ち天気情報を見てみてください。
- <img border="0" src="../images/img001.gif" width="128" height="128" alt="イラスト1">
+ <img border="0" src="https://gyazo.com/6bef48fde68e1e6a5b54e38d2ee07572" width="128" height="128" alt="QRコード">
  
 # Note
  
