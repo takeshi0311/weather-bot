@@ -23,7 +23,7 @@ https://www.drk7.jp/weather/xml/23.xml
  ②「晴れ」、「雨」、「くもり」だけでなく「晴れのちくもり」や「くもり時々雨」など全ての場合の天気を正確にユーザーに伝えるために、天気によってメッセージを変えるように条件分岐させた。
 
 各天気に合わせたメッセージ一覧はいかになります。<br><br>
-<img border="0" src="https://github.com/takeshi0311/weather-bot/blob/master/images/%E5%A4%A9%E6%B0%97%E4%B8%80%E8%A6%A7.png" width="500" height="500" alt="QRコード">
+<img border="0" src="https://github.com/takeshi0311/weather-bot/blob/master/images/%E5%A4%A9%E6%B0%97%E4%B8%80%E8%A6%A7.png" width="700" height="500" alt="QRコード">
  
  
 # Installation
