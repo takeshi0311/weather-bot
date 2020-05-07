@@ -56,6 +56,7 @@ task :update_feed => :environment do
     response = client.multicast(user_ids, message)
   end
   "OK"
+end
 # desc "This task is called by the Heroku scheduler add-on"
 # task :update_feed => :environment do
 #   require 'line/bot'  # gem 'line-bot-api'
