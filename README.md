@@ -13,8 +13,8 @@ https://www.drk7.jp/weather/
 https://www.drk7.jp/weather/xml/23.xml
 
 # DEMO
-下記リンクにデモ動画を載せています。
-一度ご覧ください。
+下記リンクにデモ動画を載せています。<br>
+一度ご覧ください。<br>
  https://gyazo.com/d70668ec5da702dba14a0320affa0307
  
 # Features
@@ -28,7 +28,7 @@ https://www.drk7.jp/weather/xml/23.xml
 # Installation
  上記、LINEbotを使うには以下のQRコードを読み取り、友達追加をしてください。
  友達追加後、「今日」、「明日」、「明後日」のどれかを打ち天気情報を見てみてください。
- <img border="0" src="https://gyazo.com/6bef48fde68e1e6a5b54e38d2ee07572" width="128" height="128" alt="QRコード">
+ <img border="0" src="https://github.com/takeshi0311/weather-bot/blob/master/images/%E5%A4%A9%E6%B0%97%E4%BA%88%E5%A0%B1botQR.png" width="128" height="128" alt="QRコード">
  
 # Note
  
