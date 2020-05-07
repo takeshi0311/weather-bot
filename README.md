@@ -27,7 +27,7 @@ https://www.drk7.jp/weather/xml/23.xml
  
 # Installation
  上記、LINEbotを使うには以下のQRコードを読み取り、友達追加をしてください。
- 友達追加後、「今日」、「明日」、「明後日」のどれかを打ち天気情報を見てみてください。
+ 友達追加後、「今日」、「明日」、「明後日」のどれかを打ち天気情報を見てみてください。<br><br>
  <img border="0" src="https://github.com/takeshi0311/weather-bot/blob/master/images/%E5%A4%A9%E6%B0%97%E4%BA%88%E5%A0%B1botQR.png" width="128" height="128" alt="QRコード">
  
 # Note
